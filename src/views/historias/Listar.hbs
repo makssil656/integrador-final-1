@@ -1,0 +1,85 @@
+<div>
+    <h1>historial</h1>
+</div>
+<hr />
+<div
+  class="table-responsive container justify-content-center align-items-center col-lg-10"
+>
+  <table id="tabla1" >
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Diagnóstico</th>
+        <th>Tratamiento</th>
+        <th>Procedimientos</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each historiasConDetalles }}
+        <tr>
+          <td>{{moment Fecha "DD-MM-YYYY"}}</td>
+          <td>{{diagnostico}}</td>
+          <td>{{tratamiento}}</td>
+          <td>{{procedimientos}}</td>
+          <td>
+            <div class="d-flex">
+              <div class="d-inline">
+                <a href="/historias/editar/{{_id}}" class="btn btn-primary">
+                  <img src="http://localhost:3000/svg/historias_editar.svg" alt="Editar paciente" class="iccon" />
+                </a>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{!-- <div
+  class="modal fade"
+  id="confirmDeleteModalHistoria"
+  tabindex="-1"
+  aria-labelledby="confirmDeleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar
+          Eliminación</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de que deseas eliminar el historial de
+          <span id="patientNameToDelete"></span>?</p>
+      </div>
+      <div class="modal-footer d-flex">
+        <div class="d-inline">
+          <FORm>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >Cancelar</button>
+          </FORm>
+        </div>
+        <div class="d-inline">
+          <form id="deleteForm" action="" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <button type="submit" class="btn btn-danger">
+              Eliminar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> --}}

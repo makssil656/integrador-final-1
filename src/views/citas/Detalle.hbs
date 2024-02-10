@@ -1,0 +1,82 @@
+<div>
+    <h1>Cita Detalles</h1>
+</div>
+<div>
+
+  <!-- Datos del paciente -->
+<div class="card">
+  <div class="card-header">
+    <h3>Datos del Paciente</h3>
+  </div>
+  <div class="card-body">
+    <p><strong>Nombres:</strong> {{cita1.paciente.nombres}}</p>
+    <p><strong>Apellidos:</strong> {{cita1.paciente.apellidos}}</p>
+  </div>
+</div>
+
+<!-- Datos de la cita -->
+<div class="card mt-3">
+  <div class="card-header">
+    <h3>Datos de la Cita</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <!-- Columna para Fecha, Hora Inicio y Hora Fin -->
+      <div class="col-md-6 text-center">
+        <p><strong>Fecha:</strong> {{fechaFormateada}}</p>
+        <p><strong>Hora Inicio:</strong> {{horaInicioFormateada}}</p>
+        <p><strong>Hora Fin:</strong> {{horaFinFormateada}}</p>
+      </div>
+
+      <!-- Columna para Motivo y Estado -->
+      <div class="col-md-6 text-center">
+        <p><strong>Motivo:</strong> {{cita1.motivo}}</p>
+        <p><strong>Estado:</strong> {{cita1.estado}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+  <!-- Botones para eliminar y atender -->
+    <form class="d-inline">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalCancelarCita" {{#if disableCancelBtn}}disabled{{/if}}>
+        <img src="http://localhost:3000/svg/cancelar_cita.svg" alt="Cancelar Cita" class="iccon" />
+        Cancelar Cita
+      </button>
+    </form>
+
+    <form action="/historias/Agregar/{{cita1.paciente._id}}/{{cita1._id}}" class="d-inline">
+    <button type="submit" class="btn btn-primary" {{#if disableatendlBtn}}disabled{{/if}}>
+    <img src="http://localhost:3000/svg/atender_cita.svg" alt="Editar paciente" class="iccon" />
+    Atender Cita
+    </button>
+    </form>
+</div>
+
+<!-- Modal para confirmar cancelación de cita -->
+<div class="modal fade" id="modalCancelarCita" tabindex="-1" role="dialog" aria-labelledby="modalCancelarCitaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCancelarCitaLabel">Confirmar Cancelación de Cita</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas cancelar esta cita?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <!-- Botón para enviar el formulario de cancelación -->
+        <button type="submit" class="btn btn-danger" onclick="document.forms['cancelForm'].submit()">Cancelar Cita</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de cancelación de cita (fuera del modal) -->
+<form id="cancelForm" method="POST" action="/citas/CambiarEstado/{{cita1._id}}" style="display: none;">
+  <input type="hidden" name="_method" value="PUT">
+</form>

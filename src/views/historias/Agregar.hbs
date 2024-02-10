@@ -1,0 +1,115 @@
+<h1>Formulario de Consulta</h1>
+
+<div class="container mt-5">
+
+  <form action="/historias/new-historia" method="POST">
+
+    <input type="hidden" name="paciente1" id="paciente1" value="{{pacienteId}}">
+    <input type="hidden" name="cita1" id="cita1" value="{{citaId}}">
+
+    <!-- Información del Paciente -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="paciente" class="form-label">Paciente</label>
+        <input type="text" class="form-control" id="paciente" name="paciente" value="{{nombreCompleto}}" disabled />
+      </div>
+
+      <div class="col-md-6">
+        <label for="fecha1" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="fecha1" name="fecha1" value="" disabled>
+      </div>
+    </div>
+
+    <!-- Antecedentes -->
+    <div class="row mb-3 border">
+      <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Antecedentes</label>
+      </div>
+      <div class="col-md-4">
+        <label for="antecedentesPersonales" class="form-label">Personales</label>
+        <textarea class="form-control" id="antecedentesPersonales" name="antecedentesPersonales"></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="antecedentesFamiliares" class="form-label">Familiares</label>
+        <textarea class="form-control" id="antecedentesFamiliares" name="antecedentesFamiliares"></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="antecedentesQuirurgicos" class="form-label">Quirúrgicos</label>
+        <textarea class="form-control" id="antecedentesQuirurgicos" name="antecedentesQuirurgicos"></textarea>
+      </div>
+    </div>
+
+    <!-- Anamnesis y Examen Físico -->
+    <div class="row mb-3 border">
+      <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Exámenes</label>
+      </div>
+      <div class="col-md-6">
+        <label for="anamnesis" class="form-label">Anamnesis</label>
+        <textarea class="form-control" id="anamnesis" name="anamnesis"></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label for="examenFisico" class="form-label">Examen Físico</label>
+        <textarea class="form-control" id="examenFisico" name="examenFisico"></textarea>
+      </div>
+    </div>
+
+    <!-- Diagnóstico, Tratamiento y Procedimientos -->
+    <div class="row mb-3 border">
+      <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Diagnóstico, Tratamiento y Procedimientos</label>
+      </div>
+      <div class="col-md-4">
+        <label for="diagnostico" class="form-label">Diagnóstico</label>
+        <textarea class="form-control" id="diagnostico" name="diagnostico" required></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="tratamiento" class="form-label">Tratamiento</label>
+        <textarea class="form-control" id="tratamiento" name="tratamiento" required></textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="procedimientos" class="form-label">Procedimientos Realizados</label>
+        <textarea class="form-control" id="procedimientos" name="procedimientos" required></textarea>
+      </div>
+    </div>
+
+    <!-- Próximo Control y Precio Consulta -->
+    <div class="row mb-3 border">
+      <div class="col-md-6">
+        <label for="proxControl" class="form-label">Próximo Control</label>
+        <input type="date" class="form-control" id="proxControl" name="proxControl">
+      </div>
+
+      <div class="col-md-6">
+        <label for="precioConsulta" class="form-label">Precio de la Consulta</label>
+        <input type="number" class="form-control" id="precioConsulta" name="precioConsulta">
+      </div>
+    </div>
+
+    <!-- Botón de Guardar Historia Clínica -->
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary"><img src="http://localhost:3000/svg/agregar_historia.svg" alt="Editar paciente" class="iccon" /> Registrar Historia Clínica</button>
+      </div>
+    </div>
+
+  </form>
+</div>
+
+
+
+<script>
+  // Obtener el elemento de input de fecha
+  var fechaInput = document.getElementById('fecha1');
+
+  // Obtener la fecha actual en formato yyyy-mm-dd
+  var fechaActual = new Date().toISOString().split('T')[0];
+
+  // Establecer la fecha actual como valor predeterminado en el campo de fecha
+  fechaInput.value = fechaActual;
+</script>

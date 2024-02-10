@@ -1,0 +1,143 @@
+
+<div>
+  <h1>Registrar Citas</h1>
+</div>
+<div class="container mt-4">
+  
+  <div class="row">
+    <div class="col-md-6">
+      <form action="/citas/new-cita" id="formularioCitas" method="POST">
+        <div class="mb-3">
+          <label for="dniInput" class="form-label">DNI del paciente:</label>
+          <input type="text" class="form-control" id="dniInput"  pattern="[0-9]{8}" required/>
+        </div>
+        <div class="mb-3">
+          <div class="row">
+            <div class="col">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" class="form-control" id="nombre" disabled />
+            </div>
+            <div class="col">
+              <label for="apellidos" class="form-label">Apellidos:</label>
+              <input type="text" class="form-control" id="apellidos" disabled />
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+
+          <div class="row">
+            <div class="col">
+              <label for="sexo" class="form-label">Sexo:</label>
+              <input type="text" class="form-control" id="sexo" disabled />
+            </div>
+            <div class="col">
+              <label for="edad" class="form-label">Edad:</label>
+              <input type="text" class="form-control" id="edad" disabled />
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de registro de citas -->
+        
+          <input type="hidden" name="idPaciente" id="idPaciente" required>
+          <input type="hidden" name="estado" id="estado" value="Pendiente">
+          <div class="mb-3">
+            <label for="motivo">Motivo</label>
+            <textarea
+              class="form-control"
+              id="motivo"
+              name="motivo"
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col">
+                <label for="fechaCita" class="form-label">Fecha de la cita:</label>
+                <input type="date" class="form-control" id="fechaCita" required />
+              </div>
+              <div class="col ">
+                <label for="horaCita" class="form-label">Hora de la cita:</label>
+                <select class="form-select" id="horaCita" name="horaCita" required>
+                  <!-- Opciones de horario -->
+
+                </select>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary"> <img src="http://localhost:3000/svg/agregar_cita.svg" alt="Editar paciente" class="iccon" /> Registrar Cita</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <!-- Calendario -->
+      <div id="calendario"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+  const dniInput = document.getElementById("dniInput");
+  dniInput.addEventListener("input", function () {
+  const dni = dniInput.value;
+  // Realizar la solicitud al servidor para obtener los datos del paciente
+  fetch(`/Paciente/${dni}`)
+    .then((response) => {
+      if (!response.ok) {
+    
+
+        throw new Error(`Error en la solicitud: ${response.statusText}`);
+      }
+      
+      return response.json();
+    })
+    .then((data) => {
+      // Actualizar los campos del paciente en tiempo real
+      document.getElementById("nombre").value = data.nombres || "";
+      document.getElementById("apellidos").value = data.apellidos || "";
+      document.getElementById("sexo").value = data.Sexo || "";
+      document.getElementById("edad").value = data.Edad || "";
+      document.getElementById("idPaciente").value = data._id || "";
+    })
+    .catch((error) => {
+      console.error("Error al obtener datos del paciente:", error);
+    });
+    
+});
+
+  document.getElementById('fechaCita').addEventListener('change', function() {
+    // Obtener la fecha seleccionada
+    var fechaSeleccionada = document.getElementById('fechaCita').value;
+
+    // Llamar a la función para cargar los horarios
+    cargarHorarios(fechaSeleccionada);
+  });
+
+  function cargarHorarios(fecha) {
+    // Hacer una solicitud al servidor Node.js para obtener los horarios de la base de datos
+    
+    fetch('/obtener_horarios_desocupados?fecha=' + fecha)
+      .then(response => response.json())
+      .then(data => mostrarHorarios(data))
+      .catch(error => console.error('Error al obtener los horarios:', error));
+  }
+
+  function mostrarHorarios(horarios) {
+    // Limpiar el select
+    var horaCitaSelect = document.getElementById('horaCita');
+    horaCitaSelect.innerHTML = '';
+
+    // Crear un elemento option por cada horario y agregarlo al select
+    horarios.forEach(function(horario) {
+        var option = document.createElement('option');
+        option.value = horario._id; // Establecer el valor del option como el _id del horario
+        option.textContent = `${horario.horaInicio} - ${horario.horaFin} (${horario.tiempo})`;
+        horaCitaSelect.appendChild(option);
+    });
+
+    // Llamada a la función para cargar los horarios al cargar la página
+document.addEventListener('DOMContentLoaded', cargarHorarios);
+}
+
+
+
+</script>

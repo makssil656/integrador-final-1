@@ -1,0 +1,277 @@
+<div class="container-fluid">
+    <h2 style="margin-top: 30px; margin-bottom: 30px;">Necesitas Ayuda</h2>
+
+    <!-- Parallax -->
+    <div class="parallax-ayuda" data-speed="0.5" alt=""></div>
+
+    <!-- Acordeón Principal -->
+    <div class="accordion" id="featuresPaciente">
+        <div class="card">
+            <div class="card-header" id="sobre_pacientes">
+                <h3 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#paciente-ayuda"
+                        aria-expanded="true" aria-controls="featuresCollapse">
+                        Sobre Pacientes
+                    </button>
+                </h3>
+            </div>
+
+            <div id="paciente-ayuda" class="collapse info" aria-labelledby="sobre_pacientes"
+                data-parent="#featuresPaciente">
+                <div class="card-body container-fluid">
+                    <!-- Contenido de Registrar Paciente-->
+                    <label class="text_submenu">¿Cómo registro a un paciente?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Pacientes</label>.
+                        </li>
+                        <li>En el submenú desplegable, elige la opción <label class="bold">Registrar Paciente</label>. Otra forma de acceder es seleccionar primero 
+                            <label class="bold">Listar Pacientes</label> 
+                            y luego <label class="bold">Registrar Paciente</label>.
+                        </li>
+                        <li>En la página de <label class="bold">Registrar Usuario</label>, 
+                            encontrarás un formulario para ingresar los datos del nuevo usuario. 
+                            Los campos a completar son los siguientes:
+                        </li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="ml-4 col-md-5 col-lg-5">
+                                <li class="subitem"><label class="bold">Apellidos:</label> Ingresa los apellidos del
+                                    paciente.</li>
+                                <li class="subitem"><label class="bold">Nombres:</label> Ingresa los nombres del paciente.
+                                </li>
+                                <li class="subitem"><label class="bold">DNI:</label> Ingresa el número de identificación
+                                    del paciente.</li>                               
+                                <li class="subitem"><label class="bold">Celular:</label> Ingresa el numero de celular del 
+                                    paciente.</li>
+                                <li class="subitem"><label class="bold">Fecha de Nacimiento:</label> Ingresa una fecha de nacimiento válida
+                                    del paciente, se calculará la edad automáticamente.</li>
+                                <li class="subitem"><label class="bold">Sexo:</label> Selecciona el sexo del paciente</li>
+                                <li class="subitem"><label class="bold">Orientación sexual:</label> Ingresa la orientacion sexual del paciente</li>
+                                <li class="subitem"><label class="bold">Dirección:</label> Ingresa la dirección del paciente</li>
+                            </ul>
+                            <div class="col-md-7 col-lg-5">
+                                <img class="img" src="http://localhost:3000/img/registrar_paciente.png"
+                                    style=" width: 550px!important; height: 390px!important;"
+                                    alt="Imagen de Registrar Usuario">
+                            </div>
+                        </div>
+                        <li> Por ultimo dar a <label class="bold">Registrar Usuario</label> para finalizar el registro.
+                        </li>
+                    </ol>
+                    <label class="text_submenu"> ¿Cómo ver la lista de los pacientes registrados?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Pacientes</label>.
+                        </li>            
+                        <li class="texto-justificado">En el submenú desplegable, elige la opción <label class="bold">Listar Paciente</label>.</li>
+                        <li class="texto-justificado">En la página de <label class="bold">Listar Paciente</label>, encontrarás una tabla donde están los datos de todos los pacientes y podrás realizar las siguientes acciones:</li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="mt-2 mb-2 ml-2">
+                                <li class="subitem"><label class="bold">Buscar Paciente:</label> En la parte derecha superior hay un buscador que puede buscar por DNI, nombre, apellido, celular,etc.</li>
+                                <li class="subitem"><label class="bold">Editar Paciente:</label> En la sección de Acciones de la tabla encuentras esta función, aparecerá un formulario donde podrás editar los datos del paciente que se ha seleccionado, luego das a Actualizar.</li>
+                                <li class="subitem"><label class="bold">Eliminar Paciente:</label> En la sección de Acciones de la tabla encuentras esta función, puedes eliminar al paciente, antes de eliminar aparecerá una ventana con los datos del paciente para confirmar la eliminación.</li>
+                                <li class="subitem"><label class="bold">Registrar Paciente:</label> Puedes acceder a registrar un nuevo paciente desde aquí.</li>  
+                            </ul>                
+                        </div>                        
+                    </ol> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acordeón para Funcionalidades Principales -->
+    <div class="accordion" id="featuresAccordion">
+        <div class="card">
+            <div class="card-header" id="featuresHeading">
+                <h3 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#horarios-ayuda"
+                        aria-expanded="true" aria-controls="featuresCollapse">
+                        Sobre Horarios
+                    </button>
+                </h3>
+            </div>
+
+            <div id="horarios-ayuda" class="collapse info" aria-labelledby="featuresHeading"
+                data-parent="#featuresAccordion">
+                <div class="card-body container-fluid">
+                    <label class="text_submenu">¿Cómo programar horarios?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Horarios</label>.
+                        </li>
+                        <li>En el submenú desplegable, elige la opción <label class="bold">Programar Horarios</label>.</li>
+                        <li>En la página de <label class="bold">Programar Horarios</label>, 
+                            encontrarás un formulario para ingresar los datos necesarios para programar un nuevo horario. 
+                            Los campos a completar son los siguientes:
+                        </li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="ml-4 col-md-5 col-lg-5">
+                                <li class="subitem"><label class="bold">Fecha:</label> Ingresa la fecha en la que 
+                                    se programará el horario, solo se puede programar fechas futuras.</li>
+                                <li class="subitem"><label class="bold">Tiempo estimado por cita:</label> Ingresa el tiempo en minutos estimado 
+                                    por cada cita.
+                                </li>
+                                <li class="subitem"><label class="bold">Hora de Inicio (mañana):</label> Ingresa la hora de inicio en la que empezará 
+                                    a atender en la mañana, la hora mínima es las 7am.</li>                               
+                                <li class="subitem"><label class="bold">Hora de Fin (mañana):</label> Ingresa la hora de inicio en la que finaliza 
+                                    la atención por la mañana, la hora máxima es las 12pm.</li>
+                                <li class="subitem"><label class="bold">Hora de Inicio (tarde):</label> Ingresa la hora de inicio en la que empezará 
+                                    a atender en la tarde, la hora mínima es las 1pm (13:00).</li>
+                                <li class="subitem"><label class="bold">Hora de Fin (tarde):</label>Ingresa la hora de inicio en la que finaliza 
+                                    la atención por la tarde, la hora máxima es las 8pm (20:00).</li>
+                            </ul>
+                            <div class="col-md-7 col-lg-5">
+                                <img class="img" src="http://localhost:3000/img/programar_horario.png"
+                                    style=" width: 620px!important; height: 290px!important;"
+                                    alt="Imagen de Registrar Usuario">
+                            </div>
+                           
+                        </div>
+                        <li><label class="bold">Mostrar Horarios:</label> Automáticamente se creará una lista de horarios según lo ingresado.</li>
+                        <li><label class="bold">Programar Horario:</label> Una vez mostrados los horarios, es momento de culminar la programación de horarios</li>
+                    </ol>
+                    <label class="text_submenu"> ¿Cómo ver la lista de horarios programados?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Horarios</label>.
+                        </li>            
+                        <li class="texto-justificado">En el submenú desplegable, elige la opción <label class="bold">Listar Horario</label>.</li>
+                        <li class="texto-justificado">En la página de <label class="bold">Listar Horario</label>, ingresa la fecha en la que quiere ver el horario programado, en caso no haya, 
+                            aparecerá un mensaje, en caso sí, podrá visualizar y realizar las siguientes acciones:</li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="mt-2 mb-2 ml-2">
+                                <li class="subitem"><label class="bold">Limpiar Fecha:</label> En la parte derecha se habilitará la opción de limpiar la fecha, lo cual hará que se elimine la programación de horarios solo de esa fecha. Solo se podrá limpiar en caso todos los horarios estén Desocupados.</li>
+                                <li class="subitem"><label class="bold">Cambiar Estado:</label> En la sección donde se muestran los horarios, puede cambiar el estado del horario de Desocupado o Inhabilitado, este último podrá ser establecido cuando el doctor considere que no debe atender en ese horario.</li>
+                            </ul>                
+                        </div>                        
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acordeón para Funcionalidades Principales -->
+    <div class="accordion" id="featuresAccordion">
+        <div class="card">
+            <div class="card-header" id="featuresHeading">
+                <h3 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#citas-ayuda"
+                        aria-expanded="true" aria-controls="featuresCollapse">
+                        Sobre Citas
+                    </button>
+                </h3>
+            </div>
+
+            <div id="citas-ayuda" class="collapse info" aria-labelledby="featuresHeading"
+                data-parent="#featuresAccordion">
+                <div class="card-body container-fluid">
+                    <label class="text_submenu">¿Cómo registrar citas?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Citas</label>.
+                        </li>
+                        <li>En el submenú desplegable, elige la opción <label class="bold">Registrar Cita</label>.</li>
+                        <li>En la página de <label class="bold">Registrar Cita</label>, 
+                            encontrarás un formulario para ingresar los datos necesarios para registrar una nueva cita. 
+                            Los campos a completar son los siguientes:
+                        </li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="ml-4 col-md-5 col-lg-5">
+                                <li class="subitem"><label class="bold">DNI paciente:</label> Ingresa el DNI del paciente a atender,
+                                    automaticamente aparecerán los datos del paciente.</li>
+                                <li class="subitem"><label class="bold">Motivo:</label> Ingresa el motivo de la cita.
+                                </li>
+                                <li class="subitem"><label class="bold">Fecha de la cita:</label> Ingresa la fecha de la cita.</li>                               
+                                <li class="subitem"><label class="bold">Hora de la cita:</label>Si hay horarios programados en la fecha seleccionada, se cargarán todos los horarios disponibles para esta fecha </li>                               
+                            </ul>
+                            <div class="col-md-7 col-lg-5">
+                                <img class="img" src="http://localhost:3000/img/registrar_cita.png"
+                                    style=" width: 620px!important; height: 290px!important;"
+                                    alt="Imagen de Registrar Usuario">
+                            </div>
+                           
+                        </div>
+                       <li> Por ultimo dar a <label class="bold">Registrar Cita</label> para finalizar el registro.
+                       </li>
+                    </ol>
+                    <label class="text_submenu"> ¿Cómo ver la lista de citas registradas?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Citas</label>.
+                        </li>            
+                        <li class="texto-justificado">En el submenú desplegable, elige la opción <label class="bold">Listar Citas</label>.</li>
+                        <li class="texto-justificado">En la página de <label class="bold">Listar Citas</label>, se muestra un calendario con las citas registradas por fecha, las citas se pueden filtrar por: Citas atendidas, pendientes, canceladas o todas.
+                        Si es que selecciono un cita registrada, me aparecerá un registro de la cita con las siguientes opciones</li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="mt-2 mb-2 ml-2">
+                                <li class="subitem"><label class="bold">Cancelar Cita:</label> Solo se podrá cancelar la cita antes de la fecha y hora de la cita y previo avisar al paciente.</li>
+                                <li class="subitem"><label class="bold">Atender Cita:</label> En esta sección, durante la cita, se habilitará este botón para atender cita y registrar la historia médica del paciente.</li>
+                            </ul>                
+                        </div>                        
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acordeón para Funcionalidades Principales -->
+    <div class="accordion" id="featuresAccordion">
+        <div class="card">
+            <div class="card-header" id="featuresHeading">
+                <h3 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#historias-ayuda"
+                        aria-expanded="true" aria-controls="featuresCollapse">
+                        Sobre Historias
+                    </button>
+                </h3>
+            </div>
+
+            <div id="historias-ayuda" class="collapse info" aria-labelledby="featuresHeading"
+                data-parent="#featuresAccordion">
+                <div class="card-body container-fluid">
+                    <label class="text_submenu">¿Cómo registrar historias?</label>
+                    <ol class="mt-3 mb-2">
+                        <li>Solo se podrá registrar historias medicas cuando se esté atendiendo a un paciente<label
+                                class="bold">Listar Citas>Seleccionar cita>Atender cita</label>.
+                        </li>                        
+                        <li>En la página de <label class="bold">Registrar historia</label>, 
+                            encontrarás un formulario para ingresar los datos necesarios para registrar una nueva historia. 
+                            Los campos a completar son los siguientes:
+                        </li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="mt-2 mb-2 ml-2">
+                                <li class="subitem"><label class="bold">Antecedentes:</label> Ingresa los Antecedentes personales, familiares y quirurgicos.</li>
+                                <li class="subitem"><label class="bold">Exámenes:</label> Ingresa los Exámenes realizados: Anamnesis, examen físico.
+                                </li>
+                                <li class="subitem"><label class="bold">Diagnóstico, Tratamiento y procedimiento:</label> Ingresa todos los campos de acuerdo a criterio del doctor.</li>                               
+                                <li class="subitem"><label class="bold">Próximo control</label> Ingresa la fecha en la que se realizará el próximo control</li>
+                                <li class="subitem"><label class="bold">Precio consulta:</label> Ingresa el monto que costó la consulta médica.</li>
+                            
+                            </ul>                          
+                           
+                        </div>
+                    </ol>
+                     <label class="text_submenu">¿Cómo editar historias?</label>
+                    <ol class="mt-3 mb-2">
+                         <li>Dirígete a la barra lateral izquierda y selecciona la opción de <label
+                                class="bold">Historias</label>.
+                        </li>
+                        <li>En el submenú desplegable, elige la opción <label class="bold">Listar Historias</label>.</li>
+                        <li>En la página de <label class="bold">Listar Historias</label>, 
+                            encontrarás un tabla donde se ven todas las historias médicas de los pacientes atendidos, aquí puedes hacer las siguientes acciones:
+                        </li>
+                        <div class="row mt-3 mb-2">
+                            <ul class="mt-2 mb-2 ml-2">
+                                <li class="subitem"><label class="bold">Buscar Paciente:</label> En la parte derecha superior hay un buscador que puede buscar por DNI, nombre, apellido, celular,etc.</li>
+                                <li class="subitem"><label class="bold">Editar historia medica:</label> En la sección de Acciones de la tabla encuentras esta función, aparecerá un formulario donde podrás editar los datos de la historia medica que se ha seleccionado, luego das a Actualizar.</li>
+                            </ul>                
+                        </div>   
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>

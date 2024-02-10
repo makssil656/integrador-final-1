@@ -1,0 +1,82 @@
+<!-- Contenido principal -->
+{{#if isLoggedIn}} 
+    <h1> <img src="http://localhost:3000/img/logo_urobsalud.png" alt="Editar paciente" /> Bienvenido a UrobSalud</h1>
+
+    <div class="container-fluid">
+        <div class="row w-100">
+            <!-- Medico -->
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card border-left-medico mx-auto">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-medico text-uppercase mb-1">
+                                    Medicos</div>
+                                <div class="h5 mb-0 text-gray-800">{{numeroMedicos}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-md fa-2x text-gray-300" style="margin-left: 40px;"></i> <!-- Icono de médico -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pacientes -->
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card border-left-success mx-auto">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Pacientes</div>
+                                <div class="h5 mb-0 text-gray-800">{{numeroPacientes}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa fa-user fa-2x text-gray-300"style="margin-left: 40px;"></i> <!-- Icono de paciente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historias -->
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card border-left-info mx-auto">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Historias
+                                </div>
+                                <div class="h5 mb-0  text-gray-800">{{numeroHistoria}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-book-open fa-2x text-gray-300" style="margin-left: 40px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pendiente de Citas -->
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card border-left-warning mx-auto">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                    Citas Pendientes</div>
+                                <div class="h5 mb-0 text-gray-800">{{numeroCitasPendientes}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <img src="http://localhost:3000/svg/citas_pendientes_negro.svg" alt="Editar paciente" style="margin-top: 10px; margin-left:30px"/> <!-- Icono de calendario -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="parallax-container" data-speed="0.5" alt=""></div>
+
+    </div>
+{{/if}}

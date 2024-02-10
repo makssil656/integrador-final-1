@@ -1,0 +1,27 @@
+{{#if success_msg}}
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <!-- Contenido del div -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <p>{{success_msg}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if error_msg}}
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <p>{{error_msg}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

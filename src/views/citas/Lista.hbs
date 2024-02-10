@@ -1,0 +1,20 @@
+<!-- Contenedor del calendario -->
+<div>
+    <h1>Citas Medicas</h1>
+</div>
+<br>
+<!-- Contenedor del calendario y botones -->
+<div class="position-relative">
+  <!-- Agrega un botón para filtrar citas -->
+  <div class="btn-group-vertical position-absolute start-0 m-2">
+    <button type="button" class="btn btn-primary" onclick="filtrarCitas('Pendiente')"> <img src="http://localhost:3000/svg/citas_pendientes.svg" alt="Editar paciente" class="iccon" /> Pendientes</button>
+    <button type="button" class="btn btn-success" onclick="filtrarCitas('Atendida')"> <img src="http://localhost:3000/svg/citas_atendidas.svg" alt="Editar paciente" class="iccon" /> Atendidas</button>
+    <button type="button" class="btn btn-danger" onclick="filtrarCitas('Cancelada')"> <img src="http://localhost:3000/svg/citas_cancelados.svg" alt="Editar paciente" class="iccon" style="margin-right:-12px" /> Canceladas</button>
+    <button type="button" class="btn btn-secondary" onclick="mostrarTodasCitas()"> <img src="http://localhost:3000/svg/citas.svg" alt="Editar paciente" class="iccon" style="margin-left: 13px"/> Mostrar Todas</button>
+  </div>
+
+  <!-- Contenedor del calendario -->
+  <div class="container-fluid" style="width: 80%; max-width: 900px; margin: 0 auto;">
+    <div id="calendario"></div>
+  </div>
+</div>

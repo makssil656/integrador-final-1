@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1>Editar Paciente</h1>
+        <!-- Formulario -->
+        <form action="/pacientes/editar/{{pacienteEditar.id}}?_method=PUT" method="post">
+            <input type="hidden" name="_method" value="PUT">
+            <div class="mb-3">
+                <label for="apellidos" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos"
+                    value="{{pacienteEditar.apellidos}}">
+            </div>
+
+            <div class="mb-3">
+                <label for="nombres" class="form-label">Nombres</label>
+                <input type="text" class="form-control" id="nombres" name="nombres" value="{{pacienteEditar.nombres}}"
+                    required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="DNI" class="form-label">DNI</label>
+                    <input type="text" class="form-control" id="DNI" name="DNI" value="{{pacienteEditar.DNI}}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="Edad" class="form-label">Edad</label>
+                    <input type="number" class="form-control" id="Edad" name="Edad" value="{{pacienteEditar.Edad}}"
+                        disabled>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="Sexo" class="form-label">Sexo</label>
+                    <select class="form-select" id="Sexo" name="Sexo" value="{{pacienteEditar.Sexo}}" required>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="orientacion_sex" class "form-label">Orientación Sexual</label>
+                    <input type="text" class="form-control" id="orientacion_sex" name="orientacion_sex"
+                        value="{{pacienteEditar.orientacion_sex}}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="Celular" class="form-label">Celular</label>
+                    <input type="text" class="form-control" id="Celular" name="Celular"
+                        value="{{pacienteEditar.Celular}}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="Fecha_naci" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" id="Fecha_naci" name="Fecha_naci"
+                        value="{{moment pacienteEditar.Fecha_naci 'YYYY-MM-DD'}}" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="Direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="Direccion" name="Direccion"
+                    value="{{pacienteEditar.Direccion}}" required>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary"> <img src="http://localhost:3000/svg/actualizar_paciente.svg" alt="Editar paciente" class="iccon" /> Actualizar Paciente</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const fechaNacimientoInput = document.getElementById('Fecha_naci');
+    const edadInput = document.getElementById('Edad');
+
+    // Función para calcular la edad
+    const calcularEdad = (fechaNacimiento) => {
+        const hoy = new Date();
+        const fechaNacimientoDate = new Date(fechaNacimiento);
+        const edad = hoy.getFullYear() - fechaNacimientoDate.getFullYear();
+
+        // Ajustar la edad si aún no ha cumplido años en este año
+        if (hoy.getMonth() < fechaNacimientoDate.getMonth() ||
+            (hoy.getMonth() === fechaNacimientoDate.getMonth() && hoy.getDate() < fechaNacimientoDate.getDate())) {
+            return edad - 1;
+        }
+
+        return edad;
+    };
+
+    // Escuchar el evento de cambio en la fecha de nacimiento
+    fechaNacimientoInput.addEventListener('input', () => {
+        const fechaNacimiento = fechaNacimientoInput.value;
+
+        // Calcular la edad y actualizar el valor del campo Edad
+        const edad = calcularEdad(fechaNacimiento);
+        edadInput.value = isNaN(edad) ? '' : edad;
+    });
+});
+
+</script>

@@ -1,0 +1,697 @@
+body {
+overflow-x: hidden;
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+#content {
+width: 100%;
+z-index: 2;
+position: fixed;
+transition: margin-left 0.5s;
+}
+
+/* Login */
+
+
+.login-container-wrapper {
+    margin-left: -300px;
+    margin-top: -70px;
+    display: flex;
+    min-height: 100vh;
+
+opacity: 0; /* Inicialmente oculto */
+animation: fadeIn 1s ease forwards; /* Animación de aparición */
+}
+
+.img-container {
+    flex: 1; /* La imagen ocupará todo el espacio disponible */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+    height: 100vh!important;
+    background-image: linear-gradient(rgba(26, 25, 25, 0.8), rgba(102, 119, 168, 0.8)), url('http://localhost:3000/img/fondo-urology.jpg');
+    background-position: center right;
+    background-repeat: no-repeat;
+  
+    /* Nuevas propiedades para centrar el texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.text-img {
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+    font-size: 50px!important;
+    color: #7abdd3;
+    font-weight: bold;
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-5px); /* Desplazamiento hacia arriba al inicio */
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0); /* Sin desplazamiento al final */
+    }
+}
+
+@keyframes fadeIn {
+to {
+    opacity: 1;
+}
+}
+
+.login-text{
+font-family: 'Catamaran', sans-serif;
+font-size: 45px!important;
+text-align: center;
+color: #333;
+margin-bottom: 20px;
+}
+
+/* Agrega este estilo a tu archivo de estilos CSS */
+.login-container {
+    flex: 1; 
+    max-width: 700px;
+    min-height: 100vh;
+    margin-left: auto;
+    margin-right: -30px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+  
+.login-container .login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+  }
+
+.login-container .login-box .utility {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+padding: 1px;
+-webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+-webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
+.login-container .login-box .login-form,
+.login-container .login-box .forget-form {
+    width: 80%;
+    position: absolute; /* Cambiado a relativo */
+    backface-visibility: hidden!important;
+    transform-style: preserve-3d;
+    transition: opacity .5s ease-in-out, transform .5s ease-in-out;
+}
+
+.login-container .login-box.flipped .login-form {
+    opacity: 0;
+    transform: rotateY(-180deg);
+}
+
+.login-container .login-box.flipped .forget-form {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+
+.login-container .login-box .forget-form {
+    opacity: 0;
+    transform: rotateY(180deg);
+}
+
+.text-alert{
+   color: rgb(149, 54, 54);
+   font-weight: bold;
+   text-align: left;
+}  
+
+
+.form-group {
+margin-bottom: 15px;
+}
+
+.login-input {
+width: 100%;
+padding: 12px;
+box-sizing: border-box;
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 13px;
+font-family: 'Catamaran', sans-serif; /* Cambia 'Arial' por la fuente que prefieras */
+font-size: 18px; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+
+.login-input:hover{
+    background-color: #f4fdff;
+}
+
+
+.form-check-input:checked{
+    background-color:#546d75;
+    border-color: #1a92d3;
+}
+
+
+
+.text-forgot{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: #0697c7;    
+}
+.text-forgot:hover, .text-forgot i:hover{
+    color: #0d789c;
+}
+
+.btn-login {
+background-color: #1a92d3;
+border-color: #1a92d3;
+color: #fff;
+width: 100%!important;
+padding: 10px 15px;
+border: none;
+border-radius: 10px;
+font-size: 18px; 
+font-weight: 500;
+font-family: 'Catamaran', sans-serif; 
+cursor: pointer;
+}
+
+.btn-login:hover {
+background-color: #297daa;
+border-color: #297daa;
+}
+
+
+
+/* Navigation partials */
+.logo_png{
+    width: 38px;
+    height: 28px;
+}
+
+.wrapper {
+display: flex;
+}
+
+#content .navbar {
+    background-color: #b5e2d6!important;
+}
+
+#sidebar {
+height: 100vh;
+width: 250px;
+position: fixed;
+top: 0;
+left: -250px;
+z-index: 1;
+background-color: #333; 
+overflow-y: auto;
+transition: 0.5s;
+}
+
+#sidebar.active {
+left: 0;
+}
+
+#sidebar.closed {
+left: -250px;
+}
+
+#sidebar.closed .components {
+display: none;
+}
+
+/* Estilo por defecto apuntando hacia abajo */
+#sidebar a.dropdown-toggle::after {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    right: 10px;
+    content: url("http://localhost:3000/svg/Forward.svg")!important;
+    border-top: 0;
+    transition: transform 0.3s ease; /* Agregado para un efecto de transición suave */
+}
+
+/* Estilo cuando está abierto apuntando hacia la derecha */
+#sidebar .dropdown-toggle.open::after {
+    transform: rotate(90deg);
+}
+
+.bottom-options{
+    width: 240px;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    z-index: 1; 
+}
+
+.selected{
+background-color: #96b5c1;
+}
+
+#content.content-active {
+margin-left: 250px;
+}
+
+
+.components {
+padding: 20px 0;
+display: block;
+}
+
+.list-unstyled{
+margin-left: 10px;
+}
+
+.components a {
+padding: 10px 15px;
+text-decoration: none;
+font-size: 18px;
+color: #fff;
+display: block;
+transition: background-color 0.3s;
+}
+
+.components li.active a:hover {
+background-color: #3aa0c2;
+color: #fff;
+}
+  
+
+.components li:not(.active) a:hover {
+background-color: #759aa7; /* Color cuando no tiene la clase active y se hace hover */
+color: #fff;
+}
+
+.components a .bi {
+margin-right: 10px;
+}
+ 
+  /* Estilo inicial del icono */
+#sidebarCollapse .navbar-toggler-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Estilo del icono durante la animación */
+#sidebarCollapse .navbar-toggler-icon.expand {
+  transform: scaleY(1.3); 
+}
+
+
+.text-menu .iccon{
+    width:28px!important;
+    height: 22px!important;
+}
+
+/* Contenido */
+
+#contenido{
+margin-left: 250px;
+margin-top: 70px;
+padding-left: 30px;
+padding-right: 30px;
+transition: margin-left 0.3s ease;
+}
+
+
+.bg-light{
+border: none;
+border-top: 1px solid #f5f5f5;
+}
+
+.text-subtitulo{
+    font-size: 20px;
+    color: black;
+    font-weight: 600;
+}
+
+.border{
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #F1F7F7;
+}
+
+.parallax-container {
+    /* this is where the magic happens:  */
+   background-image: linear-gradient(rgba(49, 48, 48, 0.2), rgba(26, 26, 24, 0.2)), url('http://localhost:3000/img/urobsalud.jpg');
+   background-attachment: fixed;
+   background-position: center center;
+   background-size: cover!important;
+   background-repeat: no-repeat;
+ 
+   /* dimensions are important, ensure it is tall enough to scroll */ 
+   margin-top: 20px;
+   min-width: 100%;
+   min-height: 200px;
+ 
+   /* you are free to lay out the container items with flexbox or whatever means you wish */
+   display: flex; 
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   border-radius:5px;   
+}
+
+.parallax-ayuda {
+    /* this is where the magic happens:  */
+   background-image: linear-gradient(rgba(49, 48, 48, 0.4), rgba(26, 26, 24, 0.4)), url('http://localhost:3000/img/ayuda.jpg');
+   background-attachment: fixed;
+   background-position: center center;
+   background-size: cover!important;
+   background-repeat: no-repeat;
+ 
+   /* dimensions are important, ensure it is tall enough to scroll */ 
+   margin-top: 10px;
+   min-width: 100%;
+   min-height: 300px;
+ 
+   /* you are free to lay out the container items with flexbox or whatever means you wish */
+   display: flex; 
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   border-radius:5px;   
+}
+
+.parallax-cuenta {
+    /* this is where the magic happens:  */
+   background-image: linear-gradient(rgba(49, 48, 48, 0.5), rgba(26, 26, 24, 0.5)), url('http://localhost:3000/img/cuenta.jpg');
+   background-attachment: fixed;
+   background-position: center center;
+   background-size: cover!important;
+   background-repeat: no-repeat;
+ 
+   /* dimensions are important, ensure it is tall enough to scroll */ 
+   margin-top: 20px;
+   min-width: 100%;
+   min-height: 300px;
+ 
+   /* you are free to lay out the container items with flexbox or whatever means you wish */
+   display: flex; 
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   border-radius:5px;   
+}
+.form-account{
+    margin-top: 30px;
+    background-color: rgb(241, 244, 245);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: #297daa!important;
+}
+
+.text-account{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: 'Catamaran', sans-serif; 
+    font-size: 25px;
+    text-align: left;
+    justify-content: left;
+}
+
+.linea-separadora {
+    width: 100%;
+    border-top: 1px solid #0697c7; /* Puedes ajustar el color de la línea según tus preferencias */
+    margin-top: 10px; /* Ajusta el margen según sea necesario */
+    margin-bottom: 20px; /* Ajusta el margen según sea necesario */
+}
+
+
+
+.btn-primary{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #0697c7!important;
+    border-color: #0697c7!important;
+}
+.icon .btn-primary{
+    width: 90%;
+}
+
+.icon .btn-danger{
+    width: 90%;
+}
+
+.btn-primary:hover{
+    background-color: #57b1cf!important;
+    border-color: #57b1cf!important;
+}
+
+.icon .iccon{
+    vertical-align: middle;
+    margin-left: -6px;
+    margin-right: -5px;
+}
+
+.dataTables_filter {
+    margin-bottom: 10px; 
+    display: flex;
+    align-items: center;
+}
+
+.dataTables_filter label {
+    margin-bottom: 0;
+    margin-right: 5px; 
+}
+
+/* Estilo para ajustar el tamaño del área de búsqueda */
+.dataTables_filter input {
+    width: 200px; 
+    height: 25px;
+    margin-left: 10px; 
+}
+  
+
+ /* Estilo para la tabla */
+#tabla1 {
+    background-color: #46636b; /* Cambiar a tu color deseado */
+    color: white;
+  }
+  
+/* Estilo para filas pares */
+#tabla1 tbody tr:nth-child(even) {
+    background-color: rgb(223, 235, 235); /* Color de fondo de las filas pares (blanco) */
+    color: #333;
+}
+  
+/* Estilo para filas impares */
+#tabla1 tbody tr:nth-child(odd) {
+    background-color: #fbf8f8; /* Color de fondo de las filas impares (gris claro) */
+    color: #333;
+}
+
+.btn-primary{
+    background-color: #1a92d3;
+    border-color: #1a92d3   ;
+}
+
+.btn-primary:hover, .btn-primary::selection{
+    background-color: #297daa;
+    border-color: #297daa;
+}
+
+.alert{
+    padding: 5px!important;
+}
+
+/* Cards */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    margin-top: 20px;
+    width: 100%; /* Hacer que la tarjeta ocupe todo el ancho */
+}
+
+.card.border-left-medico {
+    border-left: 4px solid #3aa0c2 !important;
+}
+
+.card .text-medico {
+    color:#3aa0c2;
+}
+
+.card.border-left-success {
+    border-left: 4px solid #28a745 !important;
+}
+
+.card.border-left-info {
+    border-left: 4px solid #224fb1 !important;
+}
+
+.card .text-info{
+    color: #224fb1!important;
+}
+
+.card.border-left-warning {
+    border-left: 4px solid #ffc107 !important;
+}
+
+.col-auto.bi{
+    size: 300px;
+}
+
+/* Ayuda */
+/* Estilo general del acordeón */
+.accordion {
+    border-radius: 10px;
+}
+
+/* Estilo del encabezado de la tarjeta del acordeón */
+.accordion .card .card-header {
+    width: 100% !important;
+    border-color: rgb(248, 248, 248);
+    background-color: rgb(255, 255, 255);
+}
+.accordion .accordion button {
+    width: 100%!important;
+}
+
+/* Cambia el fondo en hover o cuando está seleccionado (checked) */
+.accordion .card .card-header:hover,
+.accordion .card .card-header:checked {
+    background-color: rgb(203, 223, 230);
+}
+
+/* Estilo del enlace del botón */
+.btn-link {
+    text-decoration: none !important;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 20px !important;
+    font-weight: bold!important;
+    color: #000000 !important;
+    text-align: justify !important; /* Texto justificado */
+    padding: 10px; /* Ajusta el relleno según tus preferencias */
+    display: block; /* Asegura que los enlaces ocupen todo el ancho */
+}
+
+
+/* Botón del acordeón */
+.accordion button {
+    width: 100%;
+    text-align: left; /* Alinea el texto del botón a la izquierda */
+}
+
+/* Estilo del contenido de las secciones en los acordeones */
+/* Estilo del contenido de las secciones en los acordeones */
+.accordion .info{
+    width: 100%;
+    text-align: justify;
+}
+
+.accordion .card-body p {
+    text-align: justify;
+}
+
+.text_submenu{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left!important;
+}
+.bold{
+    font-weight: bold;
+}
+
+/* Consulta de medios para dispositivos más pequeños */
+@media screen and (max-width: 768px) {
+    /* Ajustes de estilo para dispositivos más pequeños */
+    .btn-link {
+        font-size: 16px !important;
+        padding: 8px; /* Ajusta el relleno para dispositivos más pequeños */
+    }
+}
+
+
+  
+
+@media (min-width: 576px) {
+    .card-columns {
+        -moz-column-count:3;
+        column-count: 3;
+        -moz-column-gap: 1.25rem;
+        column-gap: 1.25rem;
+        orphans: 1;
+        widows: 1
+    }
+
+    .card-columns .card {
+        display: inline-block;
+        width: 100%
+    }
+
+    .accordion .card .card-header{
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+#sidebar {
+    left: -250px;
+    width: 120px;
+}
+.text-menu{
+    font-size: 10px!important;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#sidebar.active .collapse.in {
+    display: block;
+}
+
+#sidebar.closed {
+    width: 0px;
+}
+
+#content {
+    margin-left: 0;
+}
+
+#content.content-active {
+    margin-left: 0;
+}
+
+#contenido{
+    margin-left: 120px;
+    transition: margin-left 0.3s ease;
+}
+
+.accordion .card .card-header{
+    width: 100% ;
+    border-color: rgb(229, 241, 245);;
+    background-color:rgb(229, 241, 245);
+}
+
+}
+    

@@ -1,0 +1,91 @@
+<!-- Barra de navegación -->
+
+<div class="wrapper">
+  <div id="content">
+    <nav class="navbar navbar  bg-light">
+      <div class="container-fluid">
+        <button type="button" id="sidebarCollapse" class=" navbar-toggler">
+          <span class="navbar-toggler-icon"><i style="color: #000000;"></i></span>
+        </button>
+        <a class="navbar-brand" href="#"> <img src="http://localhost:3000/img/logo_urobsalud.png" alt="Editar paciente" class="logo_png" /> UrobSalud</a>
+      </div>
+    </nav>
+  </div>
+
+  <nav id="sidebar" class="bg-dark active">
+    <div class="sidebar-header">
+      <h3>My Sidebar</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+      <li>
+        <a href="/" class="text-menu"><span class="bi bi-house-door"></span> Inicio</a>
+      </li>
+      <li>
+        <a href="#pacientesSubMenu" data-toggle="collapse" id="pacientes" aria-expanded="false" class="dropdown-toggle text-menu">
+          <span class="bi bi-person"></span> Pacientes
+        </a>
+        <ul class="collapse list-unstyled" id="pacientesSubMenu">
+          <li>
+            <a href="/pacientes/listar" class="text-menu "><img src="http://localhost:3000/svg/listar_paciente.svg" alt="Editar paciente" class="iccon" /> Listar Pacientes</a>
+          </li>
+          <li>
+            <a href="/pacientes/Agregar" class="text-menu"><img src="http://localhost:3000/svg/agregar_paciente.svg" alt="Editar paciente" class="iccon" /> Registrar Paciente</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#horariosSubMenu" data-toggle="collapse" id="horarios" aria-expanded="false" class="dropdown-toggle text-menu">
+          <span class="bi bi-clock"></span> Horarios
+        </a>
+        <ul class="collapse list-unstyled " id="horariosSubMenu">
+          <li>
+            <a href="/horarios/listar" class="text-menu "><img src="http://localhost:3000/svg/listar_horario.svg" alt="Editar paciente" style="width: 38px; height:30px; margin-left: -3px;"/> Listar Horarios</a>
+          </li>
+          <li>
+            <a href="/horarios/agregar" class="text-menu"><img src="http://localhost:3000/svg/agregar_horario.svg" alt="Editar paciente" class="iccon" /> Programar Horario</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+      <li>
+        <a href="#citasSubMenu" data-toggle="collapse" id="citas" aria-expanded="false" class="dropdown-toggle text-menu">
+          <span class="bi bi-calendar"></span> Citas
+        </a>
+        <ul class="collapse list-unstyled" id="citasSubMenu">
+          <li>
+            <a href="/citas/listar" class="text-menu"> <img src="http://localhost:3000/svg/listar_citas.svg" alt="Editar paciente" style="width: 35px; height:28px; margin-left: -3px;"   /> Listar Citas</a>
+          </li>
+          <li>
+            <a href="/citas/agregar" class="text-menu"><img src="http://localhost:3000/svg/agregar_cita.svg" alt="Editar paciente" class="iccon" /> Registrar Cita</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#historiasSubMenu" data-toggle="collapse" id="historias" aria-expanded="false" class="dropdown-toggle text-menu">
+          <span class="bi bi-book"></span> Historias
+        </a>
+        <ul class="collapse list-unstyled" id="historiasSubMenu">
+          <li>
+            <a href="/historias/Historias" class="text-menu"><img src="http://localhost:3000/svg/listar_historia.svg" alt="Editar paciente" style="width: 35px; height:28px; margin-left: -3px;" /> Listar Historias</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Separador -->
+      
+      <div class="bottom-options">
+        <hr class="bg-light">
+        <li>
+          <a href="/ayuda" class="text-menu"><span class="bi bi-question-circle"></span> Ayuda</a>
+        </li>
+        <li>
+          <a href="/cuenta" class="text-menu"><img src="http://localhost:3000/svg/configurar_cuenta.svg" alt="Editar paciente" style="width: 35px; height:28px; margin-left: -3px;" /> Configuración</a>
+        </li>
+        <li>
+          <a href="/logout" class="text-menu"><span class="bi bi-box-arrow-right"></span> Salir</a>
+        </li>
+      </div>
+      
+    </ul>
+  </nav>
+</div>

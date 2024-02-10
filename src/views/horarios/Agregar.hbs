@@ -1,0 +1,241 @@
+<div class="container mt-5">
+  <h2>Ingrese los horarios</h2>
+
+  <form id="horarioForm">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+      <label for="fecha2" class="form-label">Fecha:</label>
+      <input type="date" class="form-control" id="fecha2" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+    <label for="tiempoCita" class="form-label">Tiempo estimado por cita (minutos):</label>
+    <input type="number" class="form-control" id="tiempoCita" required min="20" max="60">
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+    <label for="horaInicioManana" class="form-label">Hora de inicio (mañana):</label>
+    <input type="time" class="form-control" id="horaInicioManana" min="07:00" max="12:00" required >
+</div>
+
+<div class="col-md-6 mb-3">
+    <label for="horaFinManana" class="form-label">Hora de fin (mañana):</label>
+    <input type="time" class="form-control" id="horaFinManana" min="07:00" max="12:00" required >
+</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+      <label for="horaInicioTarde" class="form-label">Hora de inicio (tarde):</label>
+      <input type="time" class="form-control" id="horaInicioTarde" required>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="horaFinTarde" class="form-label">Hora de fin (tarde):</label>
+      <input type="time" class="form-control" id="horaFinTarde" required>
+    </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="mostrarHorarios()"><img src="http://localhost:3000/svg/mostrar_horarios.svg" alt="Editar paciente" class="iccon" /> Mostrar Horarios</button>
+  </form>
+
+  <div class="mt-4">
+    <h3>Horarios</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora Inicio</th>
+          <th scope="col">Hora Fin</th>
+          <th scope="col">Tiempo</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody id="horariosTabla">
+        <!-- Aquí se mostrarán los horarios -->
+      </tbody>
+    </table>
+    <br>
+    <button type="button" class="btn btn-success" onclick="registrarHorarios()"><img src="http://localhost:3000/svg/agregar_horario.svg" alt="Editar paciente" class="iccon" /> Programar Horario</button>
+  </div>
+</div>
+
+<script>
+  let horariosMostrados = [];
+  function mostrarHorarios() {
+    const fecha = document.getElementById('fecha2').value;
+    const horaInicioManana = document.getElementById('horaInicioManana').value;
+    const horaFinManana = document.getElementById('horaFinManana').value;
+    const horaInicioTarde = document.getElementById('horaInicioTarde').value;
+    const horaFinTarde = document.getElementById('horaFinTarde').value;
+    const tiempoCita = parseInt(document.getElementById('tiempoCita').value);
+    const fechaSeleccionada = new Date(fecha);
+    const fechaActual = new Date();
+
+    // Validar que todos los campos estén completos
+    if (!fecha || ((!horaInicioManana || !horaFinManana) && (!horaInicioTarde || !horaFinTarde)) || isNaN(tiempoCita)) {
+        alert('Por favor, complete todos los campos.');
+        return;
+    }
+
+    if (tiempoCita < 20){
+      alert("el tiempo debe ser mayor a 20 minutos");
+      return;
+    }
+   
+    // Validar que la fecha sea al menos un día posterior a la fecha actual
+    if (fechaSeleccionada <= fechaActual) {
+        alert('La fecha debe ser al menos un día posterior a la fecha actual.');
+        return;
+    }
+    
+
+    // Convertir las horas de inicio y fin a objetos de fecha para facilitar el cálculo
+    const fechaHoraInicioManana = new Date(`${fecha}T${horaInicioManana}`);
+    const fechaHoraFinManana = new Date(`${fecha}T${horaFinManana}`);
+    const fechaHoraInicioTarde = new Date(`${fecha}T${horaInicioTarde}`);
+    const fechaHoraFinTarde = new Date(`${fecha}T${horaFinTarde}`);
+
+    // Validar que la hora de inicio sea menor que la hora de fin para cada horario
+    if (fechaHoraInicioManana >= fechaHoraFinManana || fechaHoraInicioTarde >= fechaHoraFinTarde) {
+        alert('La hora de inicio debe ser menor que la hora de fin para cada horario.');
+        return;
+    }
+
+    console.log('horaInicioManana:', horaInicioManana);
+    console.log('horaFinManana:', horaFinManana);
+    console.log('horaInicioTarde:', horaInicioTarde);
+    console.log('horaFinTarde:', horaFinTarde);
+
+    if (horaInicioManana < '07:00' || horaInicioManana > '12:00' || 
+        horaFinManana < '09:00' || horaFinManana > '12:00' ||
+        horaInicioTarde < '13:00' || horaInicioTarde > '18:00' ||
+        horaFinTarde >= '20:00') {
+      alert('Introduce horarios válidos');
+      return;
+    }
+
+
+    // Calcular la diferencia de tiempo en minutos para la mañana y la tarde
+    const tiempoDiferenciaManana = (fechaHoraFinManana - fechaHoraInicioManana) / (1000 * 60);
+    const tiempoDiferenciaTarde = (fechaHoraFinTarde - fechaHoraInicioTarde) / (1000 * 60);
+
+    // Calcular la cantidad de citas para la mañana y la tarde
+    const cantidadCitasManana = Math.floor(tiempoDiferenciaManana / tiempoCita);
+    const cantidadCitasTarde = Math.floor(tiempoDiferenciaTarde / tiempoCita);
+
+    // Validar que se hayan ingresado horas para la mañana o la tarde
+    if (cantidadCitasManana === 0 && cantidadCitasTarde === 0) {
+        alert('Por favor, ingrese al menos un horario para la mañana o la tarde.');
+        return;
+    }
+
+    // Mostrar las citas en la tabla
+    const horariosTabla = document.getElementById('horariosTabla');
+
+    // Limpiar tabla antes de agregar nuevas filas
+    horariosTabla.innerHTML = '';
+    horariosMostrados = [];
+    // Mostrar horarios de la mañana
+    for (let i = 0; i < cantidadCitasManana; i++) {
+      const newRow = horariosTabla.insertRow();
+      const cellFecha = newRow.insertCell(0);
+      const cellHoraInicio = newRow.insertCell(1);
+      const cellHoraFin = newRow.insertCell(2);
+      const cellTiempo = newRow.insertCell(3);
+      const cellEstado = newRow.insertCell(4);
+
+      const horaInicioCita = new Date(fechaHoraInicioManana.getTime() + i * tiempoCita * 60 * 1000);
+      const horaFinCita = new Date(horaInicioCita.getTime() + tiempoCita * 60 * 1000);
+
+      cellFecha.textContent = fecha;
+      cellHoraInicio.textContent = horaInicioCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      cellHoraFin.textContent = horaFinCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      cellTiempo.textContent = tiempoCita + ' min';
+      cellEstado.textContent = 'Desocupado'; // Puedes ajustar según tus necesidades
+
+      horariosMostrados.push({
+      fecha: fecha,
+      horaInicio: horaInicioCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      horaFin: horaFinCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      tiempo: tiempoCita + ' min',
+      estado: 'Desocupado' // Puedes ajustar según tus necesidades
+    });
+    }
+
+    // Mostrar horarios de la tarde
+    for (let i = 0; i < cantidadCitasTarde; i++) {
+      const newRow = horariosTabla.insertRow();
+      const cellFecha = newRow.insertCell(0);
+      const cellHoraInicio = newRow.insertCell(1);
+      const cellHoraFin = newRow.insertCell(2);
+      const cellTiempo = newRow.insertCell(3);
+      const cellEstado = newRow.insertCell(4);
+
+      const horaInicioCita = new Date(fechaHoraInicioTarde.getTime() + i * tiempoCita * 60 * 1000);
+      const horaFinCita = new Date(horaInicioCita.getTime() + tiempoCita * 60 * 1000);
+
+      cellFecha.textContent = fecha;
+      cellHoraInicio.textContent = horaInicioCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      cellHoraFin.textContent = horaFinCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      cellTiempo.textContent = tiempoCita + ' min';
+      cellEstado.textContent = 'Desocupado'; // Puedes ajustar según tus necesidades
+
+      horariosMostrados.push({
+      fecha: fecha,
+      horaInicio: horaInicioCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      horaFin: horaFinCita.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      tiempo: tiempoCita + ' min',
+      estado: 'Desocupado' // Puedes ajustar según tus necesidades
+    });
+    }
+  }
+
+  function registrarHorarios() {
+  const horariosMostradosConEstado = horariosMostrados.map(horario => ({
+    ...horario,
+  }));
+
+
+  // Function to handle the response from the server
+function horarioRegistrado(response) {
+  if (response.ok) {
+    // If the response is successful, log the message
+    return response.json().then(data => {
+      
+      console.log('Horarios registrados con éxito:', data);
+      const fecha = document.getElementById('fecha').value;
+      window.location.href = '/horarios/listar?fecha=' + fecha;
+    });
+  } else {
+    // If the response has an error status, check for the specific error message
+    return response.json().then(errorData => {
+      if (errorData.message === 'La Fecha tiene horario asignado') {
+        // Show a modal or alert indicating that the date already has a schedule
+        window.alert('Error: La fecha ya tiene horario asignado');
+        // You can replace the alert with code to show your modal
+      } else {
+        // Handle other error cases if needed
+        console.error('Error al registrar horarios:', errorData.message);
+      }
+    });
+  }
+}
+  fetch('/horarios/new-horario', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(horariosMostradosConEstado),
+  })
+    .then(horarioRegistrado)
+    .catch(error => {
+      console.error('Error al registrar horarios:', error);
+    });
+}
+
+</script>
+
+

@@ -1,0 +1,216 @@
+<div class="container mt-5">
+  <h2>Horarios Asignados</h2>
+
+  <!-- Contenedor para la fecha -->
+  <div class="row align-items-end">
+    <div class="col-md-6 mb-3">
+        <label for="fecha1" class="form-label">Fecha:</label>
+        <input type="date" class="form-control" id="fecha1" required>
+    </div>
+    <div class="col-md-6 mb-3">
+        <!-- Botón para activar el modal de advertencia -->
+        <button type="button" id="eliminarHorariosBtn" class="btn btn-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#eliminarHorariosModal">
+          <img src="http://localhost:3000/svg/limpiar_fecha.svg" alt="Editar paciente" class="iccon" /> Limpiar Fecha
+        </button>
+    </div>
+  </div>
+  <div id="horariosContenedor" class="mb-3" style="display: none;">
+    <!-- Aquí se mostrarán los horarios -->
+    <h3>Horarios</h3>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Hora Inicio</th>
+          <th scope="col">Hora Fin</th>
+          <th scope="col">Tiempo</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody id="horariosTabla">
+        <!-- Aquí se mostrarán los horarios -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- Modal de Advertencia -->
+<div class="modal fade" id="eliminarHorariosModal" tabindex="-1" aria-labelledby="eliminarHorariosModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eliminarHorariosModalLabel">Advertencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="mensajeError" style="color: red; display: none;"></p>
+        ¿Está seguro de que desea eliminar todos los horarios de esta fecha?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" onclick="confirmarEliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Agrega este div para el mensaje de éxito -->
+
+<div id="mensajeExito" class="alert alert-success mt-3" style="display: none;">
+  Horarios limpiados con éxito.
+</div>
+
+<!-- Agrega este div donde quieras mostrar el mensaje -->
+<div id="mensajeSinHorarios" class="alert alert-warning mt-3" style="display: none;">
+  No hay horarios disponibles para la fecha seleccionada.
+</div>
+
+
+<script>
+  document.getElementById('eliminarHorariosBtn').disabled = true;
+
+  document.getElementById('fecha1').addEventListener('change', function() {
+    // Obtener la fecha seleccionada
+    var fechaSeleccionada = document.getElementById('fecha1').value;
+
+    // Llamar a la función para cargar los horarios
+    cargarHorarios(fechaSeleccionada);
+  });
+
+  function cargarHorarios(fecha) {
+    // Hacer una solicitud al servidor Node.js para obtener los horarios de la base de datos
+    
+    fetch('/obtener_horarios?fecha=' + fecha)
+      .then(response => response.json())
+      .then(data => {
+        // Habilitar o deshabilitar el botón en función de si hay horarios disponibles
+        document.getElementById('eliminarHorariosBtn').disabled = data.length === 0;
+
+        // Mostrar el modal solo si hay horarios disponibles
+        if (data.length > 0) {
+          mostrarHorarios(data);
+          // Mostrar el contenedor de horarios
+          document.getElementById('horariosContenedor').style.display = 'block';
+          // Ocultar el mensaje sin horarios
+          document.getElementById('mensajeSinHorarios').style.display = 'none';
+        } else {
+          // Si no hay horarios, mostrar el mensaje y ocultar el contenedor de horarios
+          document.getElementById('horariosContenedor').style.display = 'none';
+          document.getElementById('mensajeSinHorarios').style.display = 'block';
+        }
+      })
+      .catch(error => console.error('Error al obtener los horarios:', error));
+  }
+
+  // Función para confirmar la eliminación después de hacer clic en el botón "Eliminar" del modal
+function confirmarEliminar() {
+  // Obtener la fecha seleccionada
+  var fechaSeleccionada = document.getElementById('fecha1').value;
+
+  // Hacer una solicitud al servidor Node.js para eliminar los horarios de la fecha
+  fetch('/horarios/Eliminar?fecha=' + fechaSeleccionada, {
+    method: 'DELETE'
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('No se pueden eliminar los horarios. Hay horarios ocupados para la fecha proporcionada.');
+    }
+  })
+  .then(data => {
+    // Actualizar la tabla con los horarios actualizados
+    cargarHorarios(fechaSeleccionada);
+
+    // Mostrar el mensaje de éxito
+    document.getElementById('mensajeExito').style.display = 'block';
+    // Ocultar el mensaje sin horarios
+    document.getElementById('mensajeSinHorarios').style.display = 'none';
+
+    // Ocultar el mensaje de éxito después de unos segundos (puedes ajustar el tiempo según tus necesidades)
+    setTimeout(function() {
+      document.getElementById('mensajeExito').style.display = 'none';
+    }, 3000); // Oculta el mensaje después de 3 segundos
+
+    // Cerrar el modal después de confirmar (movido aquí para cerrar solo cuando la eliminación es exitosa)
+    var eliminarHorariosModal = new bootstrap.Modal(document.getElementById('eliminarHorariosModal'));
+    eliminarHorariosModal.hide();
+  })
+  .catch(error => {
+    console.error('Error al limpiar los horarios:', error);
+
+    // Mostrar mensaje de error en el modal
+    document.getElementById('mensajeError').innerText = 'Error: ' + error.message;
+    document.getElementById('mensajeError').style.display = 'block';
+
+    // Ocultar el mensaje de error después de unos segundos
+    setTimeout(function() {
+      document.getElementById('mensajeError').style.display = 'none';
+    }, 5000); // Oculta el mensaje después de 5 segundos
+  });
+}
+
+  // Función para limpiar la fecha y deshabilitar el botón
+  function limpiarFecha() {
+    document.getElementById('fecha1').value = '';
+    document.getElementById('eliminarHorariosBtn').disabled = true;
+    // También puedes ocultar el contenedor de horarios aquí si es necesario
+    document.getElementById('horariosContenedor').style.display = 'none';
+    // Ocultar el mensaje sin horarios
+    document.getElementById('mensajeSinHorarios').style.display = 'none';
+  }
+
+
+  function mostrarHorarios(horarios) {
+  // Limpiar la tabla
+  document.getElementById('horariosTabla').innerHTML = '';
+
+  // Mostrar los nuevos horarios
+  horarios.forEach(function(horario) {
+    var row = document.createElement('tr');
+
+    // Verificar si el estado es "Desocupado" para deshabilitar el botón
+    var botonHTML = (horario.estado === 'Ocupado')
+      ? `<button type="button" class="btn btn-primary" disabled><img src="http://localhost:3000/svg/cambiar_estado_horario.svg" alt="Editar paciente" class="iccon" /> Cambiar Estado</button>`
+      : `<button type="button" class="btn btn-primary" onclick="cambiarEstado('${horario._id}', '${horario.estado}')"><img src="http://localhost:3000/svg/cambiar_estado_horario.svg" alt="Editar paciente" class="iccon" /> Cambiar Estado</button>`;
+
+    row.innerHTML = `<td>${horario.horaInicio}</td>
+                      <td>${horario.horaFin}</td>
+                      <td>${horario.tiempo}</td>
+                      <td data-id="${horario._id}">${horario.estado}</td>
+                      <td>${botonHTML}</td>`;
+
+    document.getElementById('horariosTabla').appendChild(row);
+  });
+
+  // Mostrar el contenedor de horarios
+  document.getElementById('horariosContenedor').style.display = 'block';
+}
+
+  function cambiarEstado(id, estadoActual) {
+
+  fetch('/cambiar_estado', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: id, estadoActual: estadoActual }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Actualiza el estado en la tabla en tiempo real
+    var nuevoEstado = data.nuevoEstado;
+    var fecha = data.fecha;
+
+    // Encuentra la celda que contiene el estado y actualiza su contenido
+    var estadoCell = document.querySelector(`#horariosTabla td[data-id="${id}"]`);
+    if (estadoCell) {
+      estadoCell.textContent = nuevoEstado;
+      cargarHorarios(fecha)
+    }
+  })
+  .catch(error => console.error('Error al cambiar el estado:', error));
+
+}
+</script>

@@ -1,0 +1,98 @@
+<h1>Formulario de Consulta</h1>
+
+<div class="container mt-5">
+
+  <form action="/historias/editar/{{historiaEditar.id}}?_method=PUT" method="POST">
+
+    <!-- Información del Paciente -->
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="paciente" class="form-label">Paciente</label>
+        <input type="text" class="form-control" id="paciente" name="paciente" value="{{nombreCompletoPaciente}}" disabled />
+      </div>
+
+      <div class="col-md-6">
+        <label for="fecha1" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="fecha1" name="fecha1" value="{{moment historiaEditar.fecha 'YYYY-MM-DD'}}" disabled>
+      </div>
+    </div>
+
+    <!-- Antecedentes -->
+    <div class="row mb-3 border">
+      <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Antecedentes</label>
+      </div>
+      <div class="col-md-4">
+        <label for="antecedentesPersonales" class="form-label">Personales</label>
+        <textarea class="form-control" id="antecedentesPersonales" name="antecedentesPersonales">{{historiaEditar.antecedentes.personales}}</textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="antecedentesFamiliares" class="form-label">Familiares</label>
+        <textarea class="form-control" id="antecedentesFamiliares" name="antecedentesFamiliares">{{historiaEditar.antecedentes.familiares}}</textarea>
+      </div>
+
+      <div class="col-md-4">
+        <label for="antecedentesQuirurgicos" class="form-label">Quirúrgicos</label>
+        <textarea class="form-control" id="antecedentesQuirurgicos" name="antecedentesQuirurgicos">{{historiaEditar.antecedentes.quirurgicos}}</textarea>
+      </div>
+    </div>
+    <!-- Anamnesis y Examen Físico -->
+    <div class="row mb-3 border">
+    <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Exámenes</label>
+    </div>
+    <div class="col-md-6">
+        <label for="anamnesis" class="form-label">Anamnesis</label>
+        <textarea class="form-control" id="anamnesis" name="anamnesis">{{historiaEditar.ananmesis}}</textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label for="examenFisico" class="form-label">Examen Físico</label>
+        <textarea class="form-control" id="examenFisico" name="examenFisico">{{historiaEditar.examen_fisico}}</textarea>
+    </div>
+    </div>
+
+    <!-- Diagnóstico, Tratamiento y Procedimientos -->
+    <div class="row mb-3 border">
+    <div class="col-md-12 mb-4">
+        <label class="text-subtitulo">Diagnóstico, Tratamiento y Procedimientos</label>
+    </div>
+    <div class="col-md-4">
+        <label for="diagnostico" class="form-label">Diagnóstico</label>
+        <textarea class="form-control" id="diagnostico" name="diagnostico">{{historiaEditar.diagnostico}}</textarea>
+    </div>
+
+    <div class="col-md-4">
+        <label for="tratamiento" class="form-label">Tratamiento</label>
+        <textarea class="form-control" id="tratamiento" name="tratamiento">{{historiaEditar.tratamiento}}</textarea>
+    </div>
+
+    <div class="col-md-4">
+        <label for="procedimientos" class="form-label">Procedimientos Realizados</label>
+        <textarea class="form-control" id="procedimientos" name="procedimientos">{{historiaEditar.procedimientos}}</textarea>
+    </div>
+    </div>
+
+    <!-- Próximo Control y Precio Consulta -->
+    <div class="row mb-3 border">
+      <div class="col-md-6">
+        <label for="proxControl" class="form-label">Próximo Control</label>
+        <input type="date" class="form-control" id="proxControl" name="proxControl" value="{{moment historiaEditar.prox_control 'YYYY-MM-DD'}}">
+      </div>
+
+      <div class="col-md-6">
+        <label for="precioConsulta" class="form-label">Precio de la Consulta</label>
+        <input type="number" class="form-control" id="precioConsulta" name="precioConsulta" value="{{historiaEditar.precio_consul}}">
+      </div>
+    </div>
+
+    <!-- Botón de Guardar Historia Clínica -->
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary"><img src="http://localhost:3000/svg/actualizar_historia.svg" alt="Editar paciente" class="iccon" /> Actualizar Historia Clínica</button>
+      </div>
+    </div>
+
+  </form>
+</div>
