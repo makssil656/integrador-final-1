@@ -1,6 +1,8 @@
 const cita = require('../models/cita')
 const horario = require('../models/horario')
 const Historia = require("../models/historia");
+const paciente = require('../models/paciente')
+const {whatsapp} = require('./whatsapp')
 const citaCtrl = {}
 const moment = require('moment');
 
