@@ -10,6 +10,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Usuario = require('./models/usuario');
 const helmet = require('helmet');
+const {whatsapp} = require('./controllers/whatsapp.js')
 
 const bodyParser = require('body-parser');
 require('./database.js')
@@ -116,6 +117,9 @@ app.use(require('./routes/citas.routes'));
 app.use(require('./routes/historias.routes'));
 app.use(require('./routes/horarios.routes'));
 app.use(require('./routes/configuracion.routes'));
+
+//
+whatsapp.initialize();
 
 //Static files
 app.use(express.static(path.join(__dirname, "public")));

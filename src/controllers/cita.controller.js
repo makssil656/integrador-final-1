@@ -33,6 +33,45 @@ citaCtrl.createCita = async (req, res) => {
     // Save the new cita
     await newCita.save();
 
+    const paciente1 = await paciente.findById(idPaciente);
+
+    if (!paciente1) {
+        // Manejar el caso en que el paciente no se encuentre
+        req.flash('error_msg', 'Paciente no encontrado');
+        return res.redirect('/citas/listar?isLoggedIn=' + req.isAuthenticated());
+    }
+    // Obtener la información del horario asociado a la cita
+    const horario1 = await horario.findById(horaCita);
+
+    if (!horario1) {
+        // Manejar el caso en que el horario no se encuentre
+        req.flash('error_msg', 'Horario no encontrado');
+        return res.redirect('/citas/listar?isLoggedIn=' + req.isAuthenticated());;
+    }
+    
+    const numeroTelefonoPaciente = paciente1.Celular;
+    // Construir el cuerpo del mensaje con la información del horario
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' };
+      return date.toLocaleDateString('es-PE', options);
+  }
+
+    function formatTime(timeString) {
+        const [hours, minutes] = timeString.split(':');
+        const time = new Date(0, 0, 0, hours, minutes);
+        const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        return time.toLocaleTimeString('es-PE', options);
+    }
+
+    const cuerpoMensaje = `Sr. ${paciente1.nombres} ${paciente1.apellidos} Su cita ha sido reservada para el ${formatDate(horario1.fecha)} a las ${formatTime(horario1.horaInicio)} en el consultorio UrobSalud`;
+
+    const tel = `+51${numeroTelefonoPaciente}`
+    const chatId = tel.substring(1) + "@c.us";
+    const number_details = await whatsapp.getNumberId(chatId); if(number_details) {
+    await whatsapp.sendMessage(chatId, cuerpoMensaje);
+    }
+
     // Update the corresponding horario document
     try {
         await horario.findByIdAndUpdate(horaCita, { estado: 'Ocupado' });
@@ -192,8 +231,47 @@ citaCtrl.cambiarEstadoCita = async (req, res) => {
       return res.redirect('/citas/listar');
     }
 
-    citaModificar.estado = 'Cancelada';
-    await citaModificar.save();
+    const paciente1 = await paciente.findById(citaModificar.paciente);
+    console.log(citaModificar.paciente)
+    if (!paciente1) {
+        // Manejar el caso en que el paciente no se encuentre
+        req.flash('error_msg', 'Paciente no encontrado');
+        return res.redirect('/citas/listar?isLoggedIn=' + req.isAuthenticated());
+    }
+    // Obtener la información del horario asociado a la cita
+    const horario1 = await horario.findById(citaModificar.horario);
+    horario1.estado = 'Desocupado';
+    await horario1.save();
+    
+    if (!horario1) {
+        // Manejar el caso en que el horario no se encuentre
+        req.flash('error_msg', 'Horario no encontrado');
+        return res.redirect('/citas/listar?isLoggedIn=' + req.isAuthenticated());;
+    }
+    
+    const numeroTelefonoPaciente = paciente1.Celular;
+    // Construir el cuerpo del mensaje con la información del horario
+    function formatDate1(dateString) {
+      const date = new Date(dateString);
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' };
+      return date.toLocaleDateString('es-PE', options);
+  }
+
+    function formatTime1(timeString) {
+        const [hours, minutes] = timeString.split(':');
+        const time = new Date(0, 0, 0, hours, minutes);
+        const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+        return time.toLocaleTimeString('es-PE', options);
+    }
+
+    const cuerpoMensaje = `Sr. ${paciente1.nombres} ${paciente1.apellidos} Su cita  para el ${formatDate1(horario1.fecha)} a las ${formatTime1(horario1.horaInicio)} en el consultorio UrobSalud ha sido CANCELADA, espere la reprogramación o comuniquese con el medico al numero 965754027.`;
+    
+    //enviar mensaje whatsapp
+    const tel = `+51${numeroTelefonoPaciente}`
+    const chatId = tel.substring(1) + "@c.us";
+    const number_details = await whatsapp.getNumberId(chatId); if(number_details) {
+      await whatsapp.sendMessage(chatId, cuerpoMensaje);
+      }
 
     req.flash('success_msg', 'Cita Cancelada');
     res.redirect('/citas/listar');
